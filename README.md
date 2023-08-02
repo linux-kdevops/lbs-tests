@@ -34,6 +34,11 @@ roundup demos why the kernel `round_down()` can be used over and over again.
 It also shows how `round_next()` can be used to get the index of the next
 folio but care must be taken to ensure the old original original is always used.
 
+It also demonstrates how if you use `round_down()` or `round_up()` according
+to the page order you will always have an aligned index, that is:
+
+  * (index & (nrpages - 1) is always true
+
 License
 -------
 

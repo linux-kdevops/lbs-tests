@@ -7,6 +7,12 @@
 #define round_up(x, y) ((((x)-1) | __round_mask(x, y))+1)
 #define round_down(x, y) ((x) & ~__round_mask(x, y))
 
+#define WARN_ON(x) 							\
+	do { 								\
+		if ((x))						\
+			printf("WARN: %s : %d\n", __FILE__, __LINE__);	\
+	} while (0)
+
 static bool repeat_idx_round_down = false;
 static bool repeat_next_round_up = false;
 
@@ -50,6 +56,10 @@ int main(int argc, char *argv[])
 			idx = round_down(idx, nrpages);
 		if (repeat_next_round_up)
 			idx_next = round_up(idx_next, nrpages);
+
+		/* this verifies alignment always works */
+		WARN_ON(idx & (nrpages - 1));
+		WARN_ON(idx_next & (nrpages - 1));
 
 		printf("i: %u\tidx: %u\tnext: %u\n", i, idx, idx_next);
 	}
