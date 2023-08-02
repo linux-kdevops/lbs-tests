@@ -21,12 +21,12 @@ folio index. For example to get a folio into the page cache we would use:
 Of importance to us is the `index`. On a order 4 folio valid indexes for
 different pages would be 0, 4, 8.
 
-To get page 0 you'd use folio index 0.
-To get page 1 you'd use folio index 0.
-To get page 2 you'd use folio index 0.
-To get page 3 you'd use folio index 0.
-To get page 4 you'd use folio index 1.
-To get page 5 you'd use folio index 1.
+  * To get page 0 you'd use folio index 0.
+  * To get page 1 you'd use folio index 0.
+  * To get page 2 you'd use folio index 0.
+  * To get page 3 you'd use folio index 0.
+  * To get page 4 you'd use folio index 1.
+  * To get page 5 you'd use folio index 1.
 
 and so on.
 
