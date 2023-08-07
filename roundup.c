@@ -7,6 +7,9 @@
 #define round_up(x, y) ((((x)-1) | __round_mask(x, y))+1)
 #define round_down(x, y) ((x) & ~__round_mask(x, y))
 
+#define __KERNEL_DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
+#define DIV_ROUND_UP(n, d) __KERNEL_DIV_ROUND_UP(n, d)
+
 #define WARN_ON(x) 							\
 	do { 								\
 		if ((x))						\
@@ -51,6 +54,7 @@ int main(int argc, char *argv[])
 	for (i=0; i<50; i++) {
 		unsigned int idx = round_down(i, nrpages);
 		unsigned int idx_next = round_up(i, nrpages);
+		unsigned int div_up = DIV_ROUND_UP(i, nrpages);
 
 		if (repeat_idx_round_down)
 			idx = round_down(idx, nrpages);
@@ -61,7 +65,7 @@ int main(int argc, char *argv[])
 		WARN_ON(idx & (nrpages - 1));
 		WARN_ON(idx_next & (nrpages - 1));
 
-		printf("i: %u\tidx: %u\tnext: %u\n", i, idx, idx_next);
+		printf("i: %10u   idx: %10u   next: %10u   div_up: %10u\n", i, idx, idx_next, div_up);
 	}
 
 	return 0;
