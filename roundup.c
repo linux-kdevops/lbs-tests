@@ -100,6 +100,9 @@ int main(int argc, char *argv[])
 		/*
 		 * last_idx is the index of the page beyond the end of the read
 		 * It mimics the setting in filemap_get_pages().
+		 *
+		 * That is, it is not inclusive. If you want the folio index
+		 * which also includes the last read just subtract nrpages.
 		 */
 
 		if (offset_is_address) {
