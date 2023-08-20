@@ -106,8 +106,8 @@ int main(int argc, char *argv[])
 		 */
 
 		if (offset_is_address) {
-			idx = round_down(pos >> PAGE_SHIFT, nrpages);
-			idx_next = round_up(idx + 1, nrpages);
+			idx      = round_down(pos >> PAGE_SHIFT, nrpages);
+			idx_next = round_down(pos >> PAGE_SHIFT, nrpages) + nrpages;
 			if (!last_idx_set) {
 				last_idx = DIV_ROUND_UP(pos + count, PAGE_SIZE);
 				last_idx = round_up(last_idx, nrpages);
