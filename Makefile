@@ -4,6 +4,7 @@ LDFLAGS=
 
 PROGS :=
 PROGS += roundup
+PROGS += ffs
 
 all: $(PROGS)
 
@@ -11,6 +12,9 @@ PHONY :=
 PHONY +=
 
 roundup: roundup.c
+	$(CC) -o $@ $^ $(CFLAGS)
+
+ffs: ffs.c
 	$(CC) -o $@ $^ $(CFLAGS)
 
 clean:

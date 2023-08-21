@@ -3,28 +3,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define __round_mask(x, y) ((__typeof__(x))((y)-1))
-#define round_up(x, y) ((((x)-1) | __round_mask(x, y))+1)
-#define round_down(x, y) ((x) & ~__round_mask(x, y))
-
-#define __KERNEL_DIV_ROUND_UP(n, d) (((n) + (d) - 1) / (d))
-#define DIV_ROUND_UP(n, d) __KERNEL_DIV_ROUND_UP(n, d)
-
-#define WARN_ON(x) 							\
-	do { 								\
-		if ((x))						\
-			printf("WARN: %s:%d\n", __FILE__, __LINE__);	\
-	} while (0)
-
-#define PAGE_SIZE 4096
-#define PAGE_SHIFT 12
+#include "kernel.h"
 
 static bool repeat_idx_round_down = false;
 static bool repeat_next_round_up = false;
 static bool offset_is_address = false;
 static unsigned int order = 2;
 static unsigned int offset = 0;
-unsigned int count = 50;
+static unsigned int count = 50;
 
 static void usage(const char *cmd)
 {
