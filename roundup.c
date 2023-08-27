@@ -103,7 +103,7 @@ int main(int argc, char *argv[])
 			idx = round_down(pos, nrpages);
 			idx_next = round_up(pos, nrpages);
 			if (!last_idx_set) {
-				last_idx = DIV_ROUND_UP(pos + count, nrpages);
+				last_idx = round_up(pos + count, nrpages);
 				last_idx_set = true;
 			}
 		}
