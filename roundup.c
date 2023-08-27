@@ -81,7 +81,8 @@ int main(int argc, char *argv[])
 		unsigned int pos = offset + i;
 		unsigned int idx;
 		unsigned int idx_next;
-		unsigned int last_idx;
+		unsigned int last_idx_e;
+		unsigned int last_idx_i;
 
 		/*
 		 * last_idx is the index of the page beyond the end of the read
@@ -95,15 +96,17 @@ int main(int argc, char *argv[])
 			idx      = round_down(pos >> PAGE_SHIFT, nrpages);
 			idx_next = round_down(pos >> PAGE_SHIFT, nrpages) + nrpages;
 			if (!last_idx_set) {
-				last_idx = DIV_ROUND_UP(pos + count, PAGE_SIZE);
-				last_idx = round_up(last_idx, nrpages);
+				last_idx_e = DIV_ROUND_UP(pos + count, PAGE_SIZE);
+				last_idx_e = round_up(last_idx_e, nrpages);
+				last_idx_i = last_idx_e - 1;
 				last_idx_set = true;
 			}
 		} else {
 			idx = round_down(pos, nrpages);
 			idx_next = round_up(pos, nrpages);
 			if (!last_idx_set) {
-				last_idx = round_up(pos + count, nrpages);
+				last_idx_e = round_up(pos + count, nrpages);
+				last_idx_i = last_idx_e - 1;
 				last_idx_set = true;
 			}
 		}
@@ -124,10 +127,10 @@ int main(int argc, char *argv[])
 		/* this verifies alignment always works */
 		WARN_ON(idx & (nrpages - 1));
 		WARN_ON(idx_next & (nrpages - 1));
-		WARN_ON(last_idx & (nrpages - 1));
+		WARN_ON(last_idx_e & (nrpages - 1));
 
-		printf("i: %5u  pos: %5u  idx: %5u  idx_next: %5u  last_idx: %5u\n",
-			i,      pos,      idx,      idx_next,      last_idx);
+		printf("i: %5u  pos: %5u  idx: %5u  idx_next: %5u  last_idx_e: %5u last_idx_i: %5u\n",
+			i,      pos,      idx,      idx_next,      last_idx_e,     last_idx_i);
 	}
 
 	return 0;
